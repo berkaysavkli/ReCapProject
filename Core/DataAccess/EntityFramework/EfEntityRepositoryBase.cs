@@ -14,19 +14,14 @@ namespace Core.DataAccess.EntityFramework
     {
         public void Add(TEntity entity)
         {
-            //if (entity.Description.Length >= 2 && entity.DailyPrice > 0)
-            //{
+            
                 using (TContext context = new TContext())
                 {
                     var addedEntity = context.Entry(entity);
                     addedEntity.State = EntityState.Added;
                     context.SaveChanges();
                 }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Araba ismi 2 karakterden küçük veya günlük ücret 0'dan küçük. Kayıt Başarısız");
-            //}
+            
         }
 
         public void Delete(TEntity entity)
