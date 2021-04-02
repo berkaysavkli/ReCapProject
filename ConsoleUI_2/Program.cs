@@ -13,11 +13,12 @@ namespace ConsoleUI_2
             //GetAllTest();
             //GetCarsByBrandIdTest();
             //GetCarByColorIdTest();
-            // GetCarDetailsTest();
-            // GetByIdTest(); çalıştıramadım
-            //AddTest();
-            // UpdateTest();
-            // DeleteTest();
+            //GetCarDetailsTest();
+            //GetByIdTest(); çalıştıramadım
+            //CarAddTest();
+            CustomerrAddTest();
+            //UpdateTest();
+            //DeleteTest();
         }
         private static void GetAllTest()
         {
@@ -77,7 +78,7 @@ namespace ConsoleUI_2
         //        Console.WriteLine(car);
         //    }
         //}
-        private static void AddTest()
+        private static void CarAddTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             Car carTest = new Car
@@ -107,7 +108,19 @@ namespace ConsoleUI_2
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Delete(new Car { Id=6});
 
+        }
 
+        private static void CustomerrAddTest()
+        {
+            CustomerManager customerrManager = new CustomerManager(new EfCustomerDal());
+            Customer customerTest = new Customer
+            {
+                CustomerId=1,
+                UserId=1,
+                CompanyName="Test kiralama"
+            };
+            customerrManager.Add(customerTest);
+            customerrManager.GetAll();
 
 
         }
