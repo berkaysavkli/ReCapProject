@@ -38,6 +38,9 @@ namespace Business.Constants
         public static string DescriptionInvalid = "Araba ismi en az 2 karakter olmalı. Günlük ücret 0'dan küçük olamaz";
         public static string MaintenanceTime = "Sistem Bakımda";
 
-
+        public static string CarImageAdded = "Araba resmi eklendi";
+        public static string CarImageDeleted = "Araba resmi silindi";
+        public static string CarImageUpdated="Araba resmi güncellendi";
+        public  static string FailedCarImageAdd="En fazla 5 araba resmi eklenebilir";
     }
 }
