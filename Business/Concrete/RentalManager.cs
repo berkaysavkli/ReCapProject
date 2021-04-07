@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,9 +23,10 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            if (_rentalDal.GetAll(r=>r.CarId==rental.CarId && r.ReturnDate==null).Count>=1)
+            IResult result = BusinessRules.Run(CheckRental(rental));
+            if (result != null)
             {
-                return new ErrorResult(Messages.RentalInvalid);
+                return result;
             }
             else
             {
@@ -40,13 +42,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalDeleted);
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
+        
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), (Messages.RentalListed));
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
+        
         public IDataResult<Rental> GetById(int rentalId)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == rentalId));
@@ -57,6 +59,16 @@ namespace Business.Concrete
         {
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
+        }
+
+        private IResult CheckRental (Rental rental)
+        {
+            var result= _rentalDal.GetAll(r => r.CarId == rental.CarId && r.ReturnDate == null);
+            if (result.Count>=1)
+            {
+                return new ErrorResult(Messages.RentalInvalid);
+            }
+            return new SuccessResult();
         }
     }
 }

@@ -36,6 +36,7 @@ namespace Business.Constants
         public static string UserListed = "Kullanıcılar listelendi";
 
         public static string DescriptionInvalid = "Araba ismi en az 2 karakter olmalı. Günlük ücret 0'dan küçük olamaz";
+        public static string DailyPriceInvalid = "Günlük ücret 0'dan küçük olamaz";
         public static string MaintenanceTime = "Sistem Bakımda";
 
         public static string CarImageAdded = "Araba resmi eklendi";

@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,19 +21,19 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-       
+
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.Description.Length <= 2 || car.DailyPrice < 0)
+            IResult result = BusinessRules.Run(CheckCarDescriptionLimit(car.Description),
+                CheckCarDailyPrice(car.DailyPrice));
+            if (result != null)
             {
-                return new ErrorResult(Messages.DescriptionInvalid);
+                return result;
             }
-            else
-            {
                 _carDal.Add(car);
                 return new SuccessResult(Messages.CarAdded);
-            }
+            
         }
 
         [ValidationAspect(typeof(CarValidator))]
@@ -50,7 +51,7 @@ namespace Business.Concrete
             //    return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             //}
             //İş kodları
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
         [ValidationAspect(typeof(CarValidator))]
@@ -83,5 +84,26 @@ namespace Business.Concrete
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
-    }
+
+        private IResult CheckCarDescriptionLimit(string description)
+        {
+            var result = description.Length;
+            if (result <= 2)
+            {
+                return new ErrorResult(Messages.DescriptionInvalid);
+            }
+            return new SuccessResult();
+        }
+
+        private IResult CheckCarDailyPrice(decimal dailyPrice)
+        {
+            var result = dailyPrice;
+            if (result < 0)
+            {
+                return new ErrorResult(Messages.DailyPriceInvalid);
+            }
+            return new SuccessResult();
+        }
+
+    }   
 }
