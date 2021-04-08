@@ -43,7 +43,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BrandValidator))]
         public IDataResult<Brand> GetById(int brandId)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(c => c.BrandId == brandId));
+            return new SuccessDataResult<Brand>(_brandDal.Get(c => c.Id == brandId));
         }
 
         [ValidationAspect(typeof(BrandValidator))]

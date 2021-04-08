@@ -100,7 +100,7 @@ namespace ConsoleUI_2
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Update(new Car { Id = 6, DailyPrice = 230 });
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            colorManager.Update(new Color { ColorName="Mavi",ColorId=2});
+            colorManager.Update(new Color { ColorName="Mavi",Id=2});
         }
 
         private static void DeleteTest()
@@ -115,7 +115,7 @@ namespace ConsoleUI_2
             CustomerManager customerrManager = new CustomerManager(new EfCustomerDal());
             Customer customerTest = new Customer
             {
-                CustomerId=1,
+                Id=1,
                 UserId=1,
                 CompanyName="Test kiralama"
             };

@@ -42,7 +42,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CustomerValidator))]
         public IDataResult<Customer> GetById(int customerId)
         {
-            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == customerId));
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == customerId));
         }
 
         [ValidationAspect(typeof(CustomerValidator))]
