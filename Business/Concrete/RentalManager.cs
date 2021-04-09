@@ -21,6 +21,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(RentalValidator))]
+        
         public IResult Add(Rental rental)
         {
             IResult result = BusinessRules.Run(CheckRental(rental));
