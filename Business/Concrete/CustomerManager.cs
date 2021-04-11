@@ -35,8 +35,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CustomerDeleted);
         }
 
-        [ValidationAspect(typeof(CustomerValidator))]
-        [SecuredOperation("customer.getall,admin")]
+        //[ValidationAspect(typeof(CustomerValidator))]
+        //[SecuredOperation("customer.getall,admin")]
         public IDataResult<List<Customer>> GetAll()
         {
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), (Messages.CustomerListed));
