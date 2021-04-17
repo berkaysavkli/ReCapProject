@@ -46,7 +46,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ColorValidator))]
         public IDataResult<Color> GetById(int colorId)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id == colorId));
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId));
         }
 
         [ValidationAspect(typeof(ColorValidator))]

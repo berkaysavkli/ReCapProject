@@ -46,7 +46,7 @@ namespace Business.Concrete
         [SecuredOperation("customer.getbyid,admin")]
         public IDataResult<Customer> GetById(int customerId)
         {
-            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == customerId));
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == customerId));
         }
 
         [ValidationAspect(typeof(CustomerValidator))]
